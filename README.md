@@ -8,3 +8,4 @@
 * [内网包嗅探技术](./7-5-Sniffing.py)
 * [DoS 攻击 - 死亡之 ping](./7-6-Dos-ping.py)
 * [DoS 攻击 - TCP SYN](./7-7-Dos-TCPSYN.py)
+* [DoS 攻击 - slowloris](./7-8-Dos-slowloris.py)
