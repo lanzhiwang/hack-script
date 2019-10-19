@@ -12,3 +12,4 @@
 * 后门攻击
 	* [后门服务端](./8-1-backdoorserver.py)
 	* [后门客户端](./8-1-backdoorclient.py)
+	* [将后门客户端编译成 Windows 可执行的 exe 文件](./8-3-setup.py)
