@@ -17,3 +17,9 @@
 	* [访问注册表信息息](./8-4-registrylist.py)
 	* [创建和修改注册表信息](./8-4-registryupdate.py)
 * Windows 缓冲区溢出
+	* 基于栈的缓冲区溢出
+		* [step 1](./8-6-1.py)
+		* [step 2](./8-6-2.py)
+		* [step 3](./8-6-3.py)
+		* [step 4](./8-6-4.py)
+		* [step 5](./8-6-5.py)
