@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""访问和修改注册表信息"""
+"""访问注册表信息"""
 
 from _winreg import *
 import sys

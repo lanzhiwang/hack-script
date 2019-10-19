@@ -13,4 +13,6 @@
 	* [后门服务端](./8-1-backdoorserver.py)
 	* [后门客户端](./8-1-backdoorclient.py)
 	* [将后门客户端编译成 Windows 可执行的 exe 文件](./8-1-setup.py)
-* [访问和修改注册表信息](./8-4-registry.py)
+* 注册表
+	* [访问注册表信息息](./8-4-registrylist.py)
+	* [创建和修改注册表信息](./8-4-registryupdate.py)
