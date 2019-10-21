@@ -9,7 +9,7 @@ import time
 
 
 def POD(id):
-    subprocess.call("ping server -l 65500", shell=True)
+    subprocess.call("ping host -l 65500", shell=True)
     print "%d," % id
 
 
